@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
 import{StyleSheet,TextInput, Text, View} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import GenericInput from './GenericInput'
 
 
 const SearchInput = (props)=>{
-  const [valor, setValor] = useState(props.initialValue);
   const onChange = text =>{
     setValor(text);
-    props.onChange(text);
+    if(props.onChange)
+      props.onChange(text);
 
   }
   return(
     <>
     <View style={styles.viewStyle}>
-    <AntDesign name="search1" size={20} color="black" />
-    <Text style={styles.textStyle}>{props.label}</Text>
-    <TextInput style={styles.textInputStyle} 
-    value={valor} onChangeText={onChange}/>
+    <AntDesign style={styles.iconStyle} name="search1" size={20} color="black" />
+    <GenericInput initialValue={props.initialValue} style={styles.inputStyle} 
+    onChange={onChange}/>
     </View>
     </>
   )
@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     borderRadius:50
   },
-  textInputStyle:{
+  inputStyle:{
     marginLeft:5,
     width:200
   },
-  textStyle:{
+  iconStyle:{
     alignSelf:"center"
   }
 })
