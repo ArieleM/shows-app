@@ -1,13 +1,14 @@
 import React, {useState}from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import Input from '../components/form/Input'
+import Input from '../components/form/Input';
+import SearchInput from '../components/form/SearchInput'
 
 const HomeScreen = ()=>{
   const [nome, setNome] = useState("")
   return(
     <View style={styles.viewStyle}>
-      <Input label="Nome Completo" 
-      onChange={(text)=> setNome(text)} initialValue={"Ariele"}/>
+      <SearchInput label="Nome Completo" 
+      onChange={(text)=> setNome(text)} initialValue={"Digite"}/>
     </View>
   )
 }
