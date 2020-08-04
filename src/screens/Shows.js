@@ -2,14 +2,14 @@ import React from 'react';
 import {Text} from 'react-native';
 
 
-const HomeScreen = ()=>{
+const ShowScreen = ()=>{
   return(
     <>
       <Text></Text>
       <Text></Text>
       <Text></Text>
-      <Text>Essa é a tela de Home</Text>
+      <Text>Essa é a tela de ShowScreen</Text>
     </>
   )
 }
-export default HomeScreen;
+export default ShowScreen;

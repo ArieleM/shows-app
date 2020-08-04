@@ -1,17 +1,52 @@
 import React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import HomeScreen from './src/screens/Home'
-import {createStackNavigator} from '@react-navigation/stack'
+import {TouchableOpacity, StyleSheet, View} from 'react-native';
 
+import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
+import HomeScreen from './src/screens/Home';
+import ShowsScreen from './src/screens/Shows';
+import NewShowScreen from './src/screens/NewShow';
 
 export default function App(){
-  const Stack= createStackNavigator();
+  const TabNav = createBottomTabNavigator();
+  const tabBarStyles = StyleSheet.create({
+    viewStyle:{
+      flexDirection:"row",
+      justifyContent:"space-around",
+      color:"blue"
+    }
+  })
+  const TabBar = ({navigation, state}) =>{
+    return(
+      <View style={tabBarStyles.viewStyle}>
+        <>
+          <TouchableOpacity onPress={()=> navigation.navigate("Home")}>
+            <AntDesign name="home" size={30} 
+                color={state.index === 0 ?"blue" : "black"} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=> navigation.navigate("Shows")}>
+            <Feather name="list" size={30} 
+                color={state.index === 1 ?"blue" :"black" }/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=> navigation.navigate("NewShow")}>
+            <MaterialIcons name="add-to-queue" size={30} 
+                color={state.index === 2 ?"blue" : "black" }/>
+          </TouchableOpacity>
+        </>
+      </View>
+    );
+  }
   return(
-  <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name="Séries Ltd" component={HomeScreen}/>
-    </Stack.Navigator>
-  </NavigationContainer>
+    <NavigationContainer>
+      <TabNav.Navigator tabBar={props=><TabBar {...props}/>}>
+        <TabNav.Screen name={"Home"} component={HomeScreen}/>
+        <TabNav.Screen name={"Shows"} component={ShowsScreen}/>
+        <TabNav.Screen name={"NewShow"} component={NewShowScreen}/>
+      </TabNav.Navigator>
+    </NavigationContainer>
   )
 }
