@@ -1,34 +1,28 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, FlatList, TouchableOpacity, StyleSheet, View}from 'react-native';
+import show from '../../api/show';
 
-const shows = {
-  items:[
-    {
-      id:1,
-      nome:"Friends"
-    },
-    {
-      id:2,
-      nome:"Heroes"
-    },
-    {
-      id:3,
-      nome:"Two and a half man "
-    }
-  ]
-}
 
 const ShowList = () =>{
+  const [listShow, setListShow] = useState(null);
+  useEffect(() => {
+    show.get("/shows")
+      .then(response =>{
+        setListShow(response.data)
+      })
+  },[])
+
   return(
     <>
     <View style={styles.listStyle}>
       <FlatList
-        data={shows.items}
+        data={listShow}
+        keyExtractor={item=>item.id}
         renderItem={({item})=>
         <TouchableOpacity style={styles.buttonStyle}
-        onPress={() => console.log("Cliquei em "+item.id)}
+          onPress={() => console.log("Cliquei em "+item.id)}
         >
-          <Text>{item.nome}</Text>
+          <Text style={styles.textStyle}>{item.name}</Text>
         </TouchableOpacity>
       }/>
     </View>
@@ -45,6 +39,10 @@ const styles = StyleSheet.create({
   },
   listStyle:{
     marginTop:50
+  },
+  textStyle:{
+    fontSize:16,
+    margin:5
   }
 })
 export default ShowList
