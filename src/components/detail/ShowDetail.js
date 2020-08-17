@@ -3,7 +3,10 @@ import {Text, View, StyleSheet, Image} from 'react-native';
 import {AppContext} from '../../context/AppContext'
 const ShowDetail = () =>{
   const {state} = useContext(AppContext);
-  const {name, country, network, image_thumbnail_path}= state.showList.find(item => item.id === state.itemSelected);
+  const {name, country, network, image_thumbnail_path}=
+  state.itemSelected?
+  state.showList.find(item => item.id === state.itemSelected):
+  {name:"",country:"",network:"", image_thumbnail_path:""};
   console.log(name)
   return(
     <>
