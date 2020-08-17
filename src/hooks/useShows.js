@@ -1,5 +1,5 @@
 import {useEffect, useContext} from 'react';
-import show from '../../src/api/show';
+import show from '../api/show';
 import {AppContext} from '../context/AppContext'
 
 export const useShows = ()=>{

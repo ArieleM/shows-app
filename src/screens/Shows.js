@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
     flex:1
   },
   listStyle:{
-
-    flex:2
+    flex:1
   },
   detailStyle:{
     flex:1
